@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+    echo "usage: run <quest> <part>" >&2
+    exit 1
+fi
+
+cd "$(dirname "$0")"
+exec python3 -m "quest_$1.p$2.main"

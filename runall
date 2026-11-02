@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: runall <quest>" >&2
+    exit 1
+fi
+
+cd "$(dirname "$0")"
+
+for i in {1..3}
+do
+    printf "part %s: " "$i"
+    python3 -m "quest_$1.p$i.main"
+done
