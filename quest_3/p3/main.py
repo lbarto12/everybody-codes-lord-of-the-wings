@@ -2,9 +2,7 @@ from ..load import load
 from ..common import to_int
 
 
-def valid(vote: tuple[str, str, str]) -> bool:
-    _, base, mul = vote
-
+def valid(base: str, mul: str) -> bool:
     c = to_int(base, mul)
 
     for i in range(int(mul)):
@@ -14,10 +12,10 @@ def valid(vote: tuple[str, str, str]) -> bool:
     return True
 
 
-def solve(data: list[tuple[str, str, str]]) -> int:
+def solve(data: list[tuple[str, str]]) -> int:
     s: int = 0
-    for std, base, mul in data:
-        if valid((std, base, mul)):
+    for base, mul in data:
+        if valid(base, mul):
             s += to_int(base, mul)
 
     return s

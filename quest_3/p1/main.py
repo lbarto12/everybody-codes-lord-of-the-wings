@@ -2,9 +2,9 @@ from ..load import load
 from ..common import to_int
 
 
-def solve(data: list[tuple[str, str, str]]) -> int:
+def solve(data: list[tuple[str, str]]) -> int:
     s: int = 0
-    for std, base, mul in data:
+    for base, mul in data:
         s += to_int(base, mul)
 
     return s
