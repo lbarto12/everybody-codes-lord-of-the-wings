@@ -12,8 +12,6 @@ def solve(data: list[tuple[int, int, int, int]]) -> int:
         zip(range(1, n + 1), sorted(times, key=lambda x: (-x[0], x[1])))
     )
 
-    print(*leaderboard, sep="\n")
-
     res: int = sum([place * time[1] for (place, time) in leaderboard])
 
     return res
