@@ -3,7 +3,7 @@ from ..common import to_int
 
 
 def valid(base: str, mul: str) -> bool:
-    c = to_int(base, mul)
+    c: int = to_int(base, mul)
 
     for i in range(int(mul)):
         if to_int(base, str(i)) == c:
