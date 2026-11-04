@@ -1,4 +1,3 @@
-from ast import TypeVar
 from typing import TypeAlias, TypeVarTuple
 from ..common import adjacent, in_bounds
 
@@ -6,7 +5,6 @@ Map: TypeAlias = list[list[str]]
 Pos: TypeAlias = tuple[int, int]
 
 tupT = TypeVarTuple("tupT")
-T = TypeVar("T")
 
 
 def t_add(*args: tuple[int, ...]) -> tuple[int, ...]:
