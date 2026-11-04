@@ -1,5 +1,5 @@
 from ..load import load
-from ...common import adjacent, in_bounds
+from ...common import adjacent, in_bounds, getxy, setxy
 from ..common import Map, Pos, count_adj, can_place_tree
 from ..p2.main import solve as p2
 
@@ -18,14 +18,14 @@ def solve(data: Map) -> int:
         check: set[Pos] = set()
         for tile in trees:
             for p in adjacent(*tile):
-                if in_bounds(data, p) and data[p[1]][p[0]] == "#":
+                if in_bounds(data, p) and getxy(data, p) == "#":
                     check.add(p)
 
         gen: Map = [i[:] for i in data]
         n: int = len(trees)
         for tile in check:
             if count_adj(data, tile, "=") == 0 and count_adj(data, tile, "@") >= 4:
-                gen[tile[1]][tile[0]] = "@"
+                setxy(gen, tile, "@")
                 trees.add(tile)
         if len(trees) == n:
             break

@@ -1,5 +1,5 @@
 from ..load import load
-from ...common import adjacent, in_bounds
+from ...common import adjacent, getxy, in_bounds, setxy
 from ..common import Map, Pos, count_adj
 
 
@@ -15,11 +15,11 @@ def solve(data: Map) -> tuple[Map, int]:
         next_loop: set[Pos] = set()
 
         for pos in new_land:
-            if count_adj(data, pos) >= 5 or data[pos[1]][pos[0]] == "#":
-                gen[pos[1]][pos[0]] = "#"
+            if count_adj(data, pos) >= 5 or getxy(data, pos) == "#":
+                setxy(gen, pos, "#")
                 land.add(pos)
                 for nxt in adjacent(*pos):
-                    if in_bounds(data, nxt) and data[nxt[1]][nxt[0]] != "#":
+                    if in_bounds(data, nxt) and getxy(data, nxt) != "#":
                         next_loop.add(nxt)
 
         if len(next_loop) == 0:

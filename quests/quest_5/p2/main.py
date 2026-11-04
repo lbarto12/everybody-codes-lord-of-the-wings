@@ -1,11 +1,10 @@
 from ..load import load
-from ...common import adjacent, in_bounds
+from ...common import adjacent, getxy, in_bounds, setxy
 from ..common import Map, Pos, count_adj, any_water
 from ..p1.main import solve as p1
 
 
 def solve(data: Map) -> tuple[Map, int]:
-
     data, _ = p1(data)
 
     edge_tiles: set[Pos] = set()
@@ -19,17 +18,17 @@ def solve(data: Map) -> tuple[Map, int]:
 
     sand: set[Pos] = set(edge_tiles)
     while True:
-        check: set[tuple[int, int]] = set()
+        check: set[Pos] = set()
         for s in sand:
             for pos in adjacent(*s):
-                if in_bounds(data, pos) and data[pos[1]][pos[0]] == "#":
+                if in_bounds(data, pos) and getxy(data, pos) == "#":
                     check.add(pos)
 
-        gen: list[list[str]] = [i[:] for i in data]
+        gen: Map = [i[:] for i in data]
         n: int = len(sand)
         for tile in check:
             if count_adj(data, tile, "=") >= 5:
-                gen[tile[1]][tile[0]] = "="
+                setxy(gen, tile, "=")
                 sand.add(tile)
         if len(sand) == n:
             break
