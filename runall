@@ -11,5 +11,5 @@ cd "$(dirname "$0")"
 for i in {1..3}
 do
     printf "part %s: " "$i"
-    python3 -m "quest_$1.p$i.main"
+    python3 -m "quests.quest_$1.p$i.main"
 done

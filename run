@@ -7,4 +7,4 @@ if [[ $# -ne 2 ]]; then
 fi
 
 cd "$(dirname "$0")"
-exec python3 -m "quest_$1.p$2.main"
+exec python3 -m "quests.quest_$1.p$2.main"
