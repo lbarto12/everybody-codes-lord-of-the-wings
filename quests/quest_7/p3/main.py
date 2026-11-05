@@ -6,13 +6,13 @@ from ..common import Clouds
 
 
 def balance(data: Clouds, primary: int, expl_at: int = 1_000_000) -> int:
-    graph = deepcopy(data)
+    graph: Clouds = deepcopy(data)
     states: dict[int, int] = {k: c for k, (c, _) in data.items()}
     consider: defaultdict[tuple[int, int], int] = defaultdict(int)
     consider[(primary, 10)] = 1
 
     while consider:
-        should_expl: set[int] = set()
+        exploding: set[int] = set()
         nxt: defaultdict[tuple[int, int], int] = defaultdict(int)
         for (cloud, charge), imp in consider.items():
             if not charge:
@@ -24,41 +24,29 @@ def balance(data: Clouds, primary: int, expl_at: int = 1_000_000) -> int:
 
             for con in graph[cloud][1]:
                 nxt[con, charge - 1] += imp
-                if expl and cloud not in should_expl:
+                if expl and cloud not in exploding:
                     nxt[con, 10] += 1
 
             if expl:
-                should_expl.add(cloud)
+                exploding.add(cloud)
 
-        for e in should_expl:
+        for cloud in exploding:
             for _, (_, s) in graph.items():
-                if e in s:
-                    s.remove(e)
-            if e in states:
-                del states[e]
+                if cloud in s:
+                    s.remove(cloud)
+            if cloud in states:
+                del states[cloud]
 
             nxt = defaultdict(
-                nxt.default_factory, {k: v for k, v in nxt.items() if k[0] != e}
+                nxt.default_factory, {k: v for k, v in nxt.items() if k[0] != cloud}
             )
 
-        # print(f"{states=}")
-
         consider = nxt
-        # print(consider)
 
-    # print(states.values())
     return sum(states.values())
 
 
 def solve(data: Clouds) -> int:
-
-    # print(balance(data, 2, 100))
-
-    for i in data.keys():
-        print(f"{i}:", balance(data, i))
-
-    # print([balance(data, i, 100) for i in data.keys()])
-
     return max([balance(data, i) for i in data.keys()])
 
 
