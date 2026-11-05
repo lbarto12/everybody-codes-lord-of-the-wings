@@ -9,9 +9,9 @@ def solve(data: dict[str, list[str]]) -> int:
     start: list[str] = data["NULL"]
     ingreds: set[str] = set()
 
-    q = deque(start.copy())
+    q: deque[str] = deque(start.copy())
     while q:
-        i = q.popleft()
+        i: str = q.popleft()
         if i in ingreds or i == "NULL":
             continue
         ingreds.add(i)
@@ -28,5 +28,5 @@ def solve(data: dict[str, list[str]]) -> int:
 
 
 if __name__ == "__main__":
-    ans = solve(load("quests/quest_6/p1/in.txt"))
+    ans: int = solve(load("quests/quest_6/p1/in.txt"))
     print(ans)
