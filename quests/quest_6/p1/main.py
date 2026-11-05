@@ -6,8 +6,8 @@ from ..load import load
 def solve(data: dict[str, list[str]]) -> int:
     print(*data.items(), sep="\n")
 
-    start = data["NULL"]
-    ingreds = set()
+    start: list[str] = data["NULL"]
+    ingreds: set[str] = set()
 
     q = deque(start.copy())
     while q:
