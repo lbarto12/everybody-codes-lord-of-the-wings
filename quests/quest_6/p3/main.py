@@ -11,8 +11,6 @@ def solve(data: dict[str, list[str]]) -> int:
         for ingredient in ingredients:
             flipped[ingredient].append(item)
 
-    print(*flipped.items(), sep="\n")
-
     entries: list[str] = [i for i in flipped if i.startswith("NULL")]
     chains: defaultdict[str, set[str]] = defaultdict(set)
 
@@ -32,8 +30,6 @@ def solve(data: dict[str, list[str]]) -> int:
             for x in flipped[i]:
                 q.append(x)
 
-        print(chains[item])
-
     doubles: set[str] = set()
     for item_1, i_1 in chains.items():
         for item_2, i_2 in chains.items():
@@ -41,8 +37,6 @@ def solve(data: dict[str, list[str]]) -> int:
                 continue
 
             doubles.update(i_1.intersection(i_2))
-
-    print(doubles)
 
     return len(doubles)
 

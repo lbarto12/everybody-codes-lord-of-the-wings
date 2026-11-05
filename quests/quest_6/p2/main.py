@@ -11,8 +11,6 @@ def solve(data: dict[str, list[str]]) -> int:
         for ingredient in ingredients:
             flipped[ingredient].append(item)
 
-    print(*flipped.items(), sep="\n")
-
     start: list[str] = flipped["NULL"]
     ingreds: set[str] = set()
 
@@ -28,8 +26,6 @@ def solve(data: dict[str, list[str]]) -> int:
 
         for x in flipped[i]:
             q.append(x)
-
-    print(ingreds)
 
     return len(ingreds)
 

@@ -4,7 +4,6 @@ from ..load import load
 
 
 def solve(data: dict[str, list[str]]) -> int:
-    print(*data.items(), sep="\n")
 
     start: list[str] = data["NULL"]
     ingreds: set[str] = set()
@@ -21,8 +20,6 @@ def solve(data: dict[str, list[str]]) -> int:
 
         for x in data[i]:
             q.append(x)
-
-    print(ingreds)
 
     return len(ingreds)
 
