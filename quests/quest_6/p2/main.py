@@ -1,0 +1,39 @@
+from collections import defaultdict, deque
+
+from ..load import load
+
+
+def solve(data: dict[str, list[str]]) -> int:
+
+    flipped: dict[str, list[str]] = defaultdict(list)
+
+    for item, ingredients in data.items():
+        for ingredient in ingredients:
+            flipped[ingredient].append(item)
+
+    print(*flipped.items(), sep="\n")
+
+    start: list[str] = flipped["NULL"]
+    ingreds: set[str] = set()
+
+    q = deque(start.copy())
+    while q:
+        i = q.popleft()
+        if i in ingreds or i == "NULL":
+            continue
+        ingreds.add(i)
+
+        if i not in flipped:
+            continue
+
+        for x in flipped[i]:
+            q.append(x)
+
+    print(ingreds)
+
+    return len(ingreds)
+
+
+if __name__ == "__main__":
+    ans = solve(load("quests/quest_6/p2/in.txt"))
+    print(ans)
