@@ -19,9 +19,9 @@ def solve(data: dict[str, list[str]]) -> int:
     for item in entries:
         start: list[str] = flipped[item]
 
-        q = deque(start.copy())
+        q: deque[str] = deque(start.copy())
         while q:
-            i = q.popleft()
+            i: str = q.popleft()
             if i in chains[item] or i.startswith("NULL"):
                 continue
             chains[item].add(i)
@@ -48,5 +48,5 @@ def solve(data: dict[str, list[str]]) -> int:
 
 
 if __name__ == "__main__":
-    ans = solve(load("quests/quest_6/p3/in.txt"))
+    ans: int = solve(load("quests/quest_6/p3/in.txt"))
     print(ans)
