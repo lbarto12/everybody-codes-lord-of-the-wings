@@ -104,7 +104,6 @@ def solve(data: list[Plant]) -> int:
 
         res += t
 
-        print(f"{id}: {t=} {leaves=}")
     return res
 
 

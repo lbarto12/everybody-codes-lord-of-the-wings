@@ -11,7 +11,6 @@ def solve(data: list[Plant]) -> int:
         seconds: int = 0
 
         while sum(branches) + 1 < limit:
-            print(branches)
             seconds += 1
             nxt: list[int] = []
 
@@ -25,9 +24,6 @@ def solve(data: list[Plant]) -> int:
 
             branches = nxt
 
-        print(branches)
-
-        print(seconds)
         res += seconds
 
     return res

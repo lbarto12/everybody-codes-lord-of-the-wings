@@ -28,13 +28,7 @@ def solve(data: list[Plant]) -> int:
 
             delay = branches.copy()
             branches = nxt
-            print(
-                f"{seconds} ({seconds % growth}): {sum(i[1] for i in branches)} (+{sum(i[1] for i in nxt) - sum(i[1] for i in delay)}) |branches|={len(branches)}"
-            )
 
-        # print(branches)
-
-        print(seconds)
         res += seconds
 
     return res
