@@ -42,5 +42,5 @@ def solve(data: dict[str, list[str]]) -> int:
 
 
 if __name__ == "__main__":
-    ans: int = solve(load("quests/quest_6/p3/in.txt"))
+    ans: int = solve(load(3))
     print(ans)
