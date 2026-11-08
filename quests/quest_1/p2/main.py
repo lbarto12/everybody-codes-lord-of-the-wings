@@ -17,4 +17,4 @@ def solve(data: list[int]) -> int:
 
 
 if __name__ == "__main__":
-    print(solve(load("quests/quest_1/p2/in.txt")))
+    print(solve(load(2)))
