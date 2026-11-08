@@ -15,4 +15,4 @@ def solve(data: list[tuple[int, int, int, int]]) -> int:
 
 
 if __name__ == "__main__":
-    print(solve(load("quests/quest_4/p1/in.txt")))
+    print(solve(load(1)))
