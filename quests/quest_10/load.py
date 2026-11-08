@@ -1,3 +1,6 @@
-def load(path: str) -> list[list[str]]:
-    with open(path) as file:
-        return [list(i.strip()) for i in file.readlines()]
+from quests.load import EverybodyCodesAPI
+
+
+def load(path: int) -> list[list[str]]:
+    lines: list[str] = EverybodyCodesAPI().get_input(10)[path].split("\n")
+    return [list(i) for i in lines]
