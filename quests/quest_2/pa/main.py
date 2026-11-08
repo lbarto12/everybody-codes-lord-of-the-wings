@@ -45,6 +45,6 @@ def solve(data: list[list[tuple[int, int]]]) -> int:
 
 
 if __name__ == "__main__":
-    print("part 1:", solve(load("quests/quest_2/pa/p1.txt")))
-    print("part 2:", solve(load("quests/quest_2/pa/p2.txt")))
-    print("part 3:", solve(load("quests/quest_2/pa/p3.txt")))
+    print("part 1:", solve(load(1)))
+    print("part 2:", solve(load(2)))
+    print("part 3:", solve(load(3)))
