@@ -1,40 +1,9 @@
 from collections import Counter
-from copy import deepcopy
 
-from quests.common import getxy, setxy, t_add
+from quests.common import getxy, t_add
 
 from ..load import load
-from ..common import Ghost
-
-
-def rotate(t: tuple[int, int]) -> tuple[int, int]:
-    return -t[1], t[0]
-
-
-def ghosts(data: list[list[str]]) -> tuple[list[list[str]], list[tuple[Ghost, int]]]:
-    board: list[list[str]] = deepcopy(data)
-    ghsts: list[tuple[Ghost, int]] = []
-
-    id: int = 0
-    for y, row in enumerate(board):
-        for x, c in enumerate(row):
-            if c in "><v^":
-                match c:
-                    case "<":
-                        v = (-1, 0)
-                    case ">":
-                        v = (1, 0)
-                    case "v":
-                        v = (0, 1)
-                    case "^":
-                        v = (0, -1)
-                    case _:
-                        v = (0, 0)
-                ghsts.append(((id, (x, y), v), 0))
-                id += 1
-                setxy(board, (x, y), ".")
-
-    return board, ghsts
+from ..common import Ghost, rotate, ghosts
 
 
 def to_state(
@@ -79,9 +48,6 @@ def solve(data: list[list[str]]) -> int:
                 vel = rotate(vel)
             nxt.append(((id, move, vel), col))
 
-        for g, cn in nxt:
-            if cn >= limit:
-                print(f"ghost {g[0]} dies @ {rounds=}")
         nxt = list(filter(lambda x: x[1] < limit, nxt))
 
         counts: Counter[tuple[int, int]] = Counter(i[0][1] for i in nxt)
@@ -90,9 +56,6 @@ def solve(data: list[list[str]]) -> int:
             if counts[pos] > 1:
                 nxt[i] = ((id, pos, rotate(rotate(vel))), col + 1)
 
-        for g, cn in nxt:
-            if cn >= limit:
-                print(f"ghost {g[0]} dies @ {rounds=}")
         nxt = list(filter(lambda x: x[1] < limit, nxt))
 
         rounds += 1

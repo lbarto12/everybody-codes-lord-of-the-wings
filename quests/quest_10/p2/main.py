@@ -1,38 +1,9 @@
 from collections import Counter
-from copy import deepcopy
 
-from quests.common import getxy, setxy, t_add
+from quests.common import getxy, t_add
 
 from ..load import load
-from ..common import Ghost
-
-
-def rotate(t: tuple[int, int]) -> tuple[int, int]:
-    return -t[1], t[0]
-
-
-def ghosts(data: list[list[str]]) -> tuple[list[list[str]], list[tuple[Ghost, int]]]:
-    board: list[list[str]] = deepcopy(data)
-    ghsts: list[tuple[Ghost, int]] = []
-
-    for y, row in enumerate(board):
-        for x, c in enumerate(row):
-            if c in "><v^":
-                match c:
-                    case "<":
-                        v = (-1, 0)
-                    case ">":
-                        v = (1, 0)
-                    case "v":
-                        v = (0, 1)
-                    case "^":
-                        v = (0, -1)
-                    case _:
-                        v = (0, 0)
-                ghsts.append((((x, y), v), 0))
-                setxy(board, (x, y), ".")
-
-    return board, ghsts
+from ..common import Ghost, ghosts, rotate
 
 
 def solve(data: list[list[str]]) -> int:
@@ -42,21 +13,21 @@ def solve(data: list[list[str]]) -> int:
     rounds: int = 0
     while ghsts:
         nxt: list[tuple[Ghost, int]] = []
-        for (pos, vel), col in ghsts:
+        for (_, pos, vel), col in ghsts:
             move: tuple[int, int] = t_add(pos, vel)
             if getxy(board, move) == "#":
                 col += 1
                 move = pos
                 vel = rotate(vel)
-            nxt.append(((move, vel), col))
+            nxt.append(((_, move, vel), col))
 
         nxt = list(filter(lambda x: x[1] < 10_000, nxt))
 
-        counts: Counter[tuple[int, int]] = Counter(i[0][0] for i in nxt)
+        counts: Counter[tuple[int, int]] = Counter(i[0][1] for i in nxt)
 
-        for i, ((pos, vel), col) in enumerate(nxt):
+        for i, ((_, pos, vel), col) in enumerate(nxt):
             if counts[pos] > 1:
-                nxt[i] = ((pos, rotate(rotate(vel))), col + 1)
+                nxt[i] = ((_, pos, rotate(rotate(vel))), col + 1)
 
         nxt = list(filter(lambda x: x[1] < 10_000, nxt))
 
