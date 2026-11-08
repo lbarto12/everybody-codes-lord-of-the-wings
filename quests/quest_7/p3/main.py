@@ -51,5 +51,5 @@ def solve(data: Clouds) -> int:
 
 
 if __name__ == "__main__":
-    ans: int = solve(mapify(load("quests/quest_7/p3/in.txt")))
+    ans: int = solve(mapify(load(3)))
     print(ans)
