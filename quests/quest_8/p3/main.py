@@ -1,7 +1,5 @@
 from quests.common import getxy, setxy, t_add
-
 from ..common import Cast, rounds
-
 from ..load import load
 
 
@@ -42,4 +40,4 @@ def solve(data: list[list[str | int]]) -> int:
 
 
 if __name__ == "__main__":
-    print(solve(load("quests/quest_8/p3/in.txt")))
+    print(solve(load(3)))
