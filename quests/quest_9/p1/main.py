@@ -30,5 +30,5 @@ def solve(data: list[Plant]) -> int:
 
 
 if __name__ == "__main__":
-    ans: int = solve(load("quests/quest_9/p1/in.txt"))
+    ans: int = solve(load(1))
     print(ans)
