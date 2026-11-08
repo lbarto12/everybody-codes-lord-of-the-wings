@@ -34,5 +34,5 @@ def solve(data: Map) -> tuple[Map, int]:
 
 
 if __name__ == "__main__":
-    _, ans = solve(load("quests/quest_5/p1/in.txt"))
+    _, ans = solve(load(1))
     print(ans)
