@@ -1,3 +1,5 @@
+# from quests.load import EverybodyCodesAPI
+
 from ..load import load
 
 
@@ -14,3 +16,4 @@ def solve(data: list[int]) -> int:
 
 if __name__ == "__main__":
     print(solve(load(1)))
+    # print(EverybodyCodesAPI().submit(1, 1, solve(load(1))))

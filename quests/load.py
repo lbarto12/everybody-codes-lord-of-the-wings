@@ -34,8 +34,11 @@ class EverybodyCodesAPI:
         result: requests.Response = self.__session.get(
             "https://api.everybody.codes/user/me"
         )
+        result.raise_for_status()
 
         data: dict[str, str] = cast(dict[str, str], result.json())
+        if "seed" not in data:
+            raise Exception("Not logged in: SESSION cookie is invalid or expired")
 
         self.__seed: str = data["seed"]
 
@@ -43,6 +46,7 @@ class EverybodyCodesAPI:
         response: requests.Response = self.__session.get(
             f"https://api.everybody.codes/event/2026/quest/{quest}"
         )
+        response.raise_for_status()
 
         marshalled: dict[str, str] = cast(dict[str, str], response.json())
 
@@ -77,6 +81,7 @@ class EverybodyCodesAPI:
         response: requests.Response = self.__session.get(
             f"https://everybody.codes/assets/2026/{quest}/input/{self.__seed}.json"
         )
+        response.raise_for_status()
 
         encrypted: dict[int, str] = {
             int(k): v for k, v in cast(dict[str, str], response.json()).items()
@@ -87,3 +92,21 @@ class EverybodyCodesAPI:
         inputs: dict[int, str] = self.__decrypt_inputs(encrypted, keys)
 
         return inputs
+
+    def submit(self, quest: int, part: int, answer: int) -> str:
+        print(f"submitting to Quest {quest}, Part {part} => {answer}")
+        response: requests.Response = self.__session.post(
+            f"https://api.everybody.codes/event/2026/quest/{quest}/part/{part}/answer",
+            json={"answer": str(answer)},
+        )
+
+        if response.status_code == 409:
+            return "already solved"
+        if not response.ok:
+            raise Exception(
+                f"Submit to quest {quest} part {part} failed: {response.status_code} {response.text}"
+            )
+
+        data: dict[str, bool | str] = cast(dict[str, bool | str], response.json())
+        verdict: str = "correct" if data.get("correct") else "wrong"
+        return f"{verdict}: {data.get('message', '')}"
