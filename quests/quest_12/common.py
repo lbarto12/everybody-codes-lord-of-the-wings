@@ -26,13 +26,12 @@ def islands(data: list[str]) -> list[MagmaPatch]:
             )
         )
 
-    res: list[MagmaPatch] = []
-    for y, row in enumerate(data):
-        for x, c in enumerate(row):
-            if c == "#" and (x, y) not in seen:
-                res.append(dfs((x, y), set()))
-
-    return res
+    return [
+        dfs((x, y), set())
+        for y, row in enumerate(listified)
+        for x, c in enumerate(row)
+        if c == "#" and (x, y) not in seen
+    ]
 
 
 def complete(patch: MagmaPatch) -> MagmaSquare:
@@ -41,14 +40,12 @@ def complete(patch: MagmaPatch) -> MagmaSquare:
 
 
 def missing(patch: MagmaPatch, total: MagmaSquare) -> MagmaPatch:
-    sqr: MagmaPatch = set()
-
-    for x in range(total[0][0], total[1][0] + 1):
-        for y in range(total[0][1], total[1][1] + 1):
-            if (x, y) not in patch:
-                sqr.add((x, y))
-
-    return sqr
+    return {
+        (x, y)
+        for y in range(total[0][1], total[1][1] + 1)
+        for x in range(total[0][0], total[1][0] + 1)
+        if (x, y) not in patch
+    }
 
 
 def dims(sqr: MagmaSquare) -> Dims:
@@ -56,8 +53,7 @@ def dims(sqr: MagmaSquare) -> Dims:
 
 
 def handle_l(total_dims: Dims, missing_dims: Dims) -> int:
-    tx, ty = total_dims
-    mx, my = missing_dims
+    (tx, ty), (mx, my) = total_dims, missing_dims
     return min(tx, ty, (tx - mx) + (ty - my))
 
 
@@ -68,10 +64,7 @@ def contains(outer: MagmaSquare, inner: MagmaSquare) -> bool:
 
 def handle_donut(outer: MagmaSquare, inner: MagmaSquare) -> int:
     (w, h), (mw, mh) = dims(outer), dims(inner)
-
-    lw: int = inner[0][0] - outer[0][0]
-    rw: int = outer[1][0] - inner[1][0]
-    th: int = inner[0][1] - outer[0][1]
-    bh: int = outer[1][1] - inner[1][1]
+    ((ox_0, oy_0), (ox_1, oy_1)), ((ix_0, iy_0), (ix_1, iy_1)) = outer, inner
+    lw, rw, th, bh = ix_0 - ox_0, ox_1 - ix_1, iy_0 - oy_0, oy_1 - iy_1
 
     return min(h - mh + min(lw, mh) + min(rw, mh), w - mw + min(th, mw) + min(bh, mw))
