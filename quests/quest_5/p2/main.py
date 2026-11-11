@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from ..load import load
 from ...common import adjacent, getxy, in_bounds, setxy
 from ..common import Map, Pos, count_adj, any_water
@@ -24,7 +26,7 @@ def solve(data: Map) -> tuple[Map, int]:
                 if in_bounds(data, pos) and getxy(data, pos) == "#":
                     check.add(pos)
 
-        gen: Map = [i[:] for i in data]
+        gen: Map = deepcopy(data)
         n: int = len(sand)
         for tile in check:
             if count_adj(data, tile, "=") >= 5:

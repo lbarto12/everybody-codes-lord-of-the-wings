@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from ..load import load
 from ...common import adjacent, in_bounds, getxy, setxy
 from ..common import Map, Pos, count_adj, can_place_tree
@@ -21,7 +23,7 @@ def solve(data: Map) -> int:
                 if in_bounds(data, p) and getxy(data, p) == "#":
                     check.add(p)
 
-        gen: Map = [i[:] for i in data]
+        gen: Map = deepcopy(data)
         n: int = len(trees)
         for tile in check:
             if count_adj(data, tile, "=") == 0 and count_adj(data, tile, "@") >= 4:
