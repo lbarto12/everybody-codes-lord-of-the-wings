@@ -12,12 +12,10 @@ MagmaSquare: TypeAlias = tuple[Pos, Pos]
 def islands(data: list[str]) -> list[MagmaPatch]:
     seen: set[Pos] = set()
 
+    listified: list[list[str]] = list(map(list, data))
+
     def dfs(p: Pos, island: MagmaPatch) -> MagmaPatch:
-        if (
-            not in_bounds(list(map(list, data)), p)
-            or getxy(data, p) != "#"
-            or p in seen
-        ):
+        if not in_bounds(listified, p) or getxy(listified, p) != "#" or p in seen:
             return island
         seen.add(p)
         island.add(p)
