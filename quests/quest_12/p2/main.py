@@ -55,31 +55,22 @@ def solve(data: list[str]) -> int:
     patches: list[MagmaPatch] = islands(data)
 
     res: int = 0
-    print(f"total patches: {len(patches)}")
     for i, patch in enumerate(patches):
-        print(patch)
         total = complete(patch)
-        print(f"{total=}")
         total_dims = dims(total)
         spells: int = min(*total_dims)
         missing_patch = missing(patch, total)
         if not missing_patch:
             res += spells
             continue
-        print(f"{missing_patch=}")
         missing_sqr = complete(missing_patch)
-        print(f"{missing_sqr=}")
         missing_dims = dims(missing_sqr)
-        print(f"{total_dims=}")
-        print(f"{missing_dims=}")
 
         tx, ty = total_dims
         mx, my = missing_dims
 
         spells = min(tx, ty, (tx - mx) + (ty - my))
         res += spells
-
-        print()
 
     return res
 
