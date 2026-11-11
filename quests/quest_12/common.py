@@ -1,15 +1,18 @@
+from typing import TypeAlias
+
 from quests.common import getxy, in_bounds, t_add
 
 
-MagmaSquare = tuple[tuple[int, int], tuple[int, int]]
-
-MagmaPatch = set[tuple[int, int]]
+Dims: TypeAlias = tuple[int, int]
+Pos: TypeAlias = tuple[int, int]
+MagmaPatch: TypeAlias = set[Pos]
+MagmaSquare: TypeAlias = tuple[Pos, Pos]
 
 
 def islands(data: list[str]) -> list[MagmaPatch]:
-    seen: set[tuple[int, int]] = set()
+    seen: set[Pos] = set()
 
-    def dfs(p: tuple[int, int], island: MagmaPatch) -> MagmaPatch:
+    def dfs(p: Pos, island: MagmaPatch) -> MagmaPatch:
         if (
             not in_bounds(list(map(list, data)), p)
             or getxy(data, p) != "#"
@@ -50,11 +53,11 @@ def missing(patch: MagmaPatch, total: MagmaSquare) -> MagmaPatch:
     return sqr
 
 
-def dims(sqr: MagmaSquare) -> tuple[int, int]:
+def dims(sqr: MagmaSquare) -> Dims:
     return (sqr[1][0] - sqr[0][0] + 1, sqr[1][1] - sqr[0][1] + 1)
 
 
-def handle_l(total_dims: tuple[int, int], missing_dims: tuple[int, int]) -> int:
+def handle_l(total_dims: Dims, missing_dims: Dims) -> int:
     tx, ty = total_dims
     mx, my = missing_dims
     return min(tx, ty, (tx - mx) + (ty - my))
