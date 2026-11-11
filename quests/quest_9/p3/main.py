@@ -1,3 +1,5 @@
+from typing import cast
+
 from quests.quest_9.common import Plant
 
 from ..load import load
@@ -52,7 +54,7 @@ from math import comb
 
 
 def counts(a: int, b: int) -> int:
-    return comb(a + b, a) * (2**a)
+    return cast(int, comb(a + b, a) * (2**a))
 
 
 def time(growth: int, a: int, b: int) -> int:

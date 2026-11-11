@@ -13,6 +13,11 @@ def adjacent(x: int, y: int) -> Generator[tuple[int, int]]:
             yield (x + j, y + i)
 
 
+def adjacent4(p: tuple[int, int]) -> Generator[tuple[int, int]]:
+    for o in {(-1, 0), (1, 0), (0, -1), (0, 1)}:
+        yield t_add(p, o)
+
+
 def in_bounds[T](data: list[list[T]], p: tuple[int, int]) -> bool:
     return 0 <= p[0] < len(data[0]) and 0 <= p[1] < len(data)
 

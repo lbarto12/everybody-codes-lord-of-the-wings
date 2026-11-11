@@ -1,6 +1,6 @@
 from typing import TypeAlias
 
-from quests.common import getxy, in_bounds, t_add
+from quests.common import adjacent4, getxy, in_bounds, t_add
 
 
 Dims: TypeAlias = tuple[int, int]
@@ -11,7 +11,6 @@ MagmaSquare: TypeAlias = tuple[Pos, Pos]
 
 def islands(data: list[str]) -> list[MagmaPatch]:
     seen: set[Pos] = set()
-
     listified: list[list[str]] = list(map(list, data))
 
     def dfs(p: Pos, island: MagmaPatch) -> MagmaPatch:
@@ -20,11 +19,10 @@ def islands(data: list[str]) -> list[MagmaPatch]:
         seen.add(p)
         island.add(p)
 
-        return island.union(dfs(t_add(p, (-1, 0)), island)).union(
-            dfs(t_add(p, (1, 0)), island).union(
-                dfs(t_add(p, (0, 1)), island).union(dfs(t_add(p, (0, -1)), island))
-            )
-        )
+        for p in adjacent4(p):
+            island.update(dfs(p, island))
+
+        return island
 
     return [
         dfs((x, y), set())

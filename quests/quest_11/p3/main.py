@@ -32,7 +32,7 @@ def solve(portals: int, shortcuts: list[tuple[int, int]]) -> int:
             start += step
 
         for a, b, c, d in generate_pairings(list(positions)):
-            cpy = deepcopy(states)
+            cpy: dict[tuple[int, int], int] = deepcopy(states)
             tst: int = get_load(
                 apply_shortcut(
                     apply_shortcut(apply_shortcut(apply_shortcut(cpy, a), b), c), d
