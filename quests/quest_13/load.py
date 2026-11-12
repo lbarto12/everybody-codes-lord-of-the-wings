@@ -19,13 +19,11 @@ def load(part: int) -> list[list[Hand]]:  # hands, total rotational value
         for i, hand in enumerate(hands):
             res[-1].append(
                 Hand(
-                    {
-                        "id": i,
-                        "step": hand,  # (total_ticks // hand),
-                        "direction": Dir(direction[i]),
-                        "position": current[i],
-                        "seconds": move[i],
-                    }
+                    id=i,
+                    step=hand,  # (total_ticks // hand),
+                    direction=Dir(direction[i]),
+                    position=current[i],
+                    seconds=move[i],
                 )
             )
 
