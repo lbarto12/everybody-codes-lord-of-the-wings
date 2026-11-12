@@ -1,5 +1,3 @@
-import math
-
 from quests.load import EverybodyCodesAPI
 
 from .common import Dir, Hand
