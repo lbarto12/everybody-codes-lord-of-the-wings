@@ -1,5 +1,6 @@
 from copy import deepcopy
 from itertools import combinations
+from typing import Unpack
 
 from quests.common import DisjointSetUnion
 
@@ -20,7 +21,7 @@ def solve(data: list[list[str]]) -> int:
         dsu: DisjointSetUnion[str] = DisjointSetUnion(nodes)
 
         for combo in graph:
-            if combo.intersection(set(c)):
+            if combo.intersection(c):
                 dsu.union(*combo)
 
         ocpy = [i for i in ocpy if not set(i[0]).intersection(c)]
