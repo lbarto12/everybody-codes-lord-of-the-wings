@@ -13,12 +13,7 @@ def valid(base: str, mul: str) -> bool:
 
 
 def solve(data: list[tuple[str, str]]) -> int:
-    s: int = 0
-    for base, mul in data:
-        if valid(base, mul):
-            s += to_int(base, mul)
-
-    return s
+    return sum(to_int(base, mul) for base, mul in data if valid(base, mul))
 
 
 if __name__ == "__main__":

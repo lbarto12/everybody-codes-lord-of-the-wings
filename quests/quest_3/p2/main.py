@@ -3,11 +3,7 @@ from ..common import to_int
 
 
 def solve(data: list[tuple[str, str]]) -> int:
-    s: int = 0
-    for base, mul in data:
-        s += to_int(base, mul)
-
-    return s
+    return sum(to_int(base, mul) for base, mul in data)
 
 
 if __name__ == "__main__":
