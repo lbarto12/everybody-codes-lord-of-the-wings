@@ -1,10 +1,11 @@
-from collections import defaultdict, deque
+from collections import defaultdict
+
+from quests.quest_6.common import bfs
 
 from ..load import load
 
 
 def solve(data: dict[str, list[str]]) -> int:
-
     flipped: dict[str, list[str]] = defaultdict(list)
 
     for item, ingredients in data.items():
@@ -14,20 +15,7 @@ def solve(data: dict[str, list[str]]) -> int:
     start: list[str] = flipped["NULL"]
     ingreds: set[str] = set()
 
-    q: deque[str] = deque(start.copy())
-    while q:
-        i: str = q.popleft()
-        if i in ingreds or i == "NULL":
-            continue
-        ingreds.add(i)
-
-        if i not in flipped:
-            continue
-
-        for x in flipped[i]:
-            q.append(x)
-
-    return len(ingreds)
+    return bfs(flipped, ingreds, start)
 
 
 if __name__ == "__main__":
