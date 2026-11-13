@@ -1,6 +1,3 @@
-from ..load import load
-
-
 def deduce(data: list[list[tuple[int, int]]]) -> list[list[tuple[int, int]]]:
     res: list[list[tuple[int, int]]] = []
     for row in data:
@@ -29,22 +26,16 @@ def mx_range(row: list[tuple[int, int]]) -> int:
     return mx
 
 
-def solve(data: list[list[tuple[int, int]]]) -> int:
+def solve_from(data: list[list[tuple[int, int]]]) -> int:
     data = deduce(data)
 
     n: int = mx_range(data[0])
 
     result: int = 0
     for row in data:
-        res = [0] * n
+        res: list[int] = [0] * n
         for i in range(1, n + 1):
             res[sum(int(left == i) for left, _ in row)] = i
         result += int("".join(map(str, res)))
 
     return result
-
-
-if __name__ == "__main__":
-    print("part 1:", solve(load(1)))
-    print("part 2:", solve(load(2)))
-    print("part 3:", solve(load(3)))
