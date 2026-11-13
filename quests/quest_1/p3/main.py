@@ -9,9 +9,9 @@ def solve(data: list[int]) -> int:
     n: int = 3
     res: int = 0
     for outpost in data:
-        while calc(n) < outpost:
+        while (r := calc(n)) < outpost:
             n += 2
-        res += calc(n) - outpost
+        res += r - outpost
 
     return res
 
