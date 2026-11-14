@@ -1,17 +1,12 @@
 import heapq
 from itertools import count, pairwise
 import sys
-from typing import Callable, Hashable, TypeAlias
+from typing import Callable, Hashable
 
 from quests.common import adjacent4, getxy, t_add
+from quests.quest_15.common import Pos, Vel, Graph
 
 from ..load import load
-
-Pos: TypeAlias = tuple[int, int]
-Vel: TypeAlias = tuple[int, int]
-Run: TypeAlias = tuple[Pos, Vel, frozenset[Pos], int]  # _, _, sulfur, dist
-
-Graph = dict[int, list[tuple[int, int, frozenset[Pos], int]]]
 
 
 def rotate_cw(v: Vel) -> Vel:
@@ -69,10 +64,10 @@ def graphify(data: list[list[str]]) -> tuple[Graph, int, int, frozenset[Pos]]:
         return length, frozenset(deps), p[0]
 
     graph: Graph = {}
-    eid = count()
+    eid: count[int] = count()
 
     def add_edge(a: int, b: int, length: int, deps: frozenset[Pos]) -> None:
-        e = next(eid)
+        e: int = next(eid)
         graph.setdefault(a, []).append((b, length, deps, e))
         graph.setdefault(b, []).append((a, length, deps, e))
 
@@ -180,7 +175,7 @@ def solve(data: list[list[str]], need: int = 202620262026, cap: int = 5000) -> i
     times: list[int | None] = min_times(graph, s, e, cap)
     if need > cap:
         period, cost, n0 = find_pattern(times)
-        reps = (need - n0) // period
+        reps: int = (need - n0) // period
         base, extra = need - reps * period, reps * cost
     else:
         base, extra = need, 0
