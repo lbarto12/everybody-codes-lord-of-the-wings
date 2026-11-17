@@ -14,7 +14,6 @@ def pancake_sort(s: str) -> int:
 
         flips += len(s[i + 1 : r + 1])
         s = s[: i + 1] + s[i + 1 : r + 1][::-1] + s[r + 1 :]
-        print(i, len(s))
     return flips
 
 
@@ -23,4 +22,4 @@ def solve(data: str) -> int:
 
 
 if __name__ == "__main__":
-    print(solve(load("quests/quest_16/p2/in.txt")))
+    print(solve(load(2)))
