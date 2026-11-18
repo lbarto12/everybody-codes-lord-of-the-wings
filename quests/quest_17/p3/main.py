@@ -1,48 +1,39 @@
-from time import sleep
 from typing import Callable
 
-from quests.common import getxy, in_bounds, t_add
+from quests.common import t_add
 
-
+from ..common import Pos, Vel, gen_can_move
 from ..load import load
 
-Pos = tuple[int, int]
 
-
-def wallhugger(
-    data: list[list[str]], vel: tuple[int, int], rotate: Callable[[Pos], Pos]
-) -> int:
+def wallhugger(data: list[list[str]], vel: Vel, rotate: Callable[[Pos], Pos]) -> int:
     pos: Pos = (0, 0)
     end: Pos = (len(data[0]) - 1, len(data) - 1)
 
-    trail: int = 0
+    can_move: Callable[[Pos], int] = gen_can_move(data)
 
-    def can_move(to: Pos) -> bool:
-        return in_bounds(data, to) and getxy(data, to) == "#"
+    trail: int = 1
 
     while pos != end or can_move(t_add(pos, rotate(vel))):
-        side: Pos = t_add(pos, new_rot := rotate(vel))
-
-        front: Pos = t_add(pos, vel)
-        other_side: Pos = t_add(pos, trip_rot := rotate(rotate(rotate(vel))))
-        behind: Pos = t_add(pos, rev_rot := rotate(rotate(vel)))
-
-        if can_move(side):
+        if can_move(side := t_add(pos, new_rot := rotate(vel))):
             pos = side
             vel = new_rot
-        elif can_move(front):
+        elif can_move(front := t_add(pos, vel)):
             trail += 1
             pos = front
-        elif can_move(other_side):
+        elif can_move(
+            other_side := t_add(pos, trip_rot := rotate(rotate(rotate(vel))))
+        ):
             trail += 2
             pos = other_side
             vel = trip_rot
         else:
             trail += 3
+            behind: Pos = t_add(pos, rev_rot := rotate(rotate(vel)))
             vel = rev_rot
             pos = behind
 
-    return trail + 1
+    return trail
 
 
 def solve(data: list[list[str]]) -> int:
@@ -53,4 +44,4 @@ def solve(data: list[list[str]]) -> int:
 
 
 if __name__ == "__main__":
-    print(solve(load("quests/quest_17/p3/in.txt")))
+    print(solve(load(3)))

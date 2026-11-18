@@ -1,9 +1,5 @@
-from typing import TypeAlias
+from quests.load import EverybodyCodesAPI
 
 
-Pos: TypeAlias = tuple[int, int]
-
-
-def load(path: str) -> list[list[str]]:
-    with open(path) as file:
-        return [list(i.strip()) for i in file.readlines()]
+def load(part: int) -> list[list[str]]:
+    return [list(i) for i in EverybodyCodesAPI().get_input(17)[part].split("\n")]
