@@ -15,9 +15,9 @@ def solve(data: list[tuple[int, int, int]]) -> int:
         while data[ri][1] < height:
             ri -= 1
 
-        left, right = data[li], data[ri]
-        spread: int = right[0] + right[2] - left[0]
-        run: int = min(left[1], right[1]) - height + 1
+        (x1, y1, _), (x2, y2, w2) = data[li], data[ri]
+        spread: int = x2 + w2 - x1
+        run: int = min(y1, y2) - height + 1
 
         res += spread * run
         height += run
