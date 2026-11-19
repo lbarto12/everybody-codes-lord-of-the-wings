@@ -3,10 +3,9 @@ from ..load import load_p2
 
 def solve(data: list[tuple[int, int, int]]) -> int:
     mx: int = max(i[1] for i in data)
-    height: int = 1
 
-    li = 0
-    ri = -1
+    height: int = 1
+    li, ri = 0, -1
 
     res: int = 0
     while height <= mx:
@@ -17,10 +16,11 @@ def solve(data: list[tuple[int, int, int]]) -> int:
             ri -= 1
 
         left, right = data[li], data[ri]
-
         spread: int = right[0] + right[2] - left[0]
-        res += spread
-        height += 1
+        run: int = min(left[1], right[1]) - height + 1
+
+        res += spread * run
+        height += run
 
     return res
 
