@@ -1,4 +1,4 @@
-from ..load import load
+from ..load import load_p1
 
 
 def solve(data: list[tuple[int, int]]) -> int:
@@ -9,11 +9,10 @@ def solve(data: list[tuple[int, int]]) -> int:
         xs: set[int] = {i[0] for i in data if i[1] >= height}
         spread: int = max(xs) - min(xs) + 1
         res += spread
-        print(spread)
         height -= 1
 
     return res
 
 
 if __name__ == "__main__":
-    print(solve(load("quests/quest_18/p1/in.txt")))
+    print(solve(load_p1()))
