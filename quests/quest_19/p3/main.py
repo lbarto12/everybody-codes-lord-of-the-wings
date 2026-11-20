@@ -53,4 +53,4 @@ def solve(data: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    print(solve(load_p3("quests/quest_19/p3/in.txt")))
+    print(solve(load_p3(3)))
