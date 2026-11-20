@@ -17,6 +17,9 @@ from ..load import load_p3
 # chosen. Works for my input either way.
 #
 # E.g. next R comes from max(M tokens, Y tokens).
+#
+# does NOT work on the first example from the question, because K should
+# be chosen :)
 
 
 def spent(c: Counter[str]) -> bool:
