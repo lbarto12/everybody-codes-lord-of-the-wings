@@ -6,7 +6,7 @@ def swap1(i: int, c: str, s: str) -> str:
     return s[:i] + c + s[i + 1 :]
 
 
-def swap(i: int, c1: str, j: int, c2: str, s: str) -> str:
+def swap2(i: int, c1: str, j: int, c2: str, s: str) -> str:
     return swap1(i, c1, swap1(j, c2, s))
 
 
@@ -21,7 +21,7 @@ def try_move(s: str) -> int:
             for j, b in enumerate(s):
                 if j != i:
                     for y in GET.get(b, ()):
-                        if evaluate(swap(i, x, j, y, s)):
+                        if evaluate(swap2(i, x, j, y, s)):
                             return segments(s)
 
     return 0
