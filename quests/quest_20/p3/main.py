@@ -1,5 +1,5 @@
 from ..load import load
-from ..common import to_b11, evaluate, segments, GIVE, GET, SELF, SEG
+from ..common import to_b11, evaluate, segments, GIVE, GET, SELF
 
 
 def swap1(i: int, c: str, s: str) -> str:
@@ -36,14 +36,7 @@ def try_move(s: str) -> int:
 
 
 def solve(data: list[str]) -> str:
-    res: int = 0
-    for eq in data:
-        if evaluate(eq):
-            res += sum(SEG[i] for i in eq)
-        elif c := try_move(eq):
-            res += c
-
-    return to_b11(res)
+    return to_b11(sum(segments(eq) if evaluate(eq) else try_move(eq) for eq in data))
 
 
 if __name__ == "__main__":
