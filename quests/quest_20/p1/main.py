@@ -1,30 +1,9 @@
 from ..load import load
-
-SEG: dict[str, int] = {
-    "0": 6,
-    "1": 2,
-    "2": 5,
-    "3": 5,
-    "4": 4,
-    "5": 5,
-    "6": 6,
-    "7": 3,
-    "8": 7,
-    "9": 6,
-    "+": 2,
-    "-": 1,
-    "=": 2,
-    " ": 0,
-}
+from ..common import evaluate, segments
 
 
 def solve(data: list[str]) -> int:
-    res: int = 0
-    for eq in data:
-        if eval(eq.replace("=", "==")):
-            res += sum(SEG[i] for i in eq)
-
-    return res
+    return sum(segments(eq) for eq in data if evaluate(eq))
 
 
 if __name__ == "__main__":
