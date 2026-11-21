@@ -10,27 +10,19 @@ def swap(i: int, c1: str, j: int, c2: str, s: str) -> str:
     return swap1(i, c1, swap1(j, c2, s))
 
 
-def do_trades(idx: tuple[int, int], give: str, get: str, s: str) -> bool:
-    for x in GIVE[give]:
-        for y in GET[get]:
-            check: str = swap(idx[0], x, idx[1], y, s)
-            if evaluate(check):
-                return True
-    return False
-
-
 def try_move(s: str) -> int:
     segs: int = segments(s)
     for i, a in enumerate(s):
         for o in SELF.get(a, set()):
-            check: str = swap1(i, o, s)
-            if evaluate(check):
+            if evaluate(swap1(i, o, s)):
                 return segs
-        for j, b in enumerate(s[i + 1 :], i + 1):
-            if (a in GIVE and b in GET and do_trades((i, j), a, b, s)) or (
-                b in GIVE and a in GET and do_trades((j, i), b, a, s)
-            ):
-                return segs
+
+        for x in GIVE.get(a, ()):
+            for j, b in enumerate(s):
+                if j != i:
+                    for y in GET.get(b, ()):
+                        if evaluate(swap(i, x, j, y, s)):
+                            return segments(s)
 
     return 0
 
