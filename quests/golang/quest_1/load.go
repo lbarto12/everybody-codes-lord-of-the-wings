@@ -2,13 +2,22 @@
 package quest_1
 
 import (
+	"fmt"
 	"log"
+	"lotw"
 	"os"
 	"strconv"
 	"strings"
 )
 
 func Load(path string) []int {
+	api, err := lotw.MakeEverybodyCodesAPI()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(api.MustInput(1))
+
 	bytes, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatal(err)
