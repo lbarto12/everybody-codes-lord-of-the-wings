@@ -25,5 +25,5 @@ func Solve(data []int) int {
 }
 
 func main() {
-	fmt.Println(Solve(quest_1.Load("quest_1/p3/in.txt")))
+	fmt.Println(Solve(quest_1.Load(3)))
 }
