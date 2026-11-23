@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	load "lotw/quest_1"
+	"lotw/quest_1"
 	"math"
 )
 
@@ -20,5 +20,5 @@ func Solve(data []int) int {
 }
 
 func main() {
-	fmt.Println(Solve(load.From("quest_1/p1/in.txt")))
+	fmt.Println(Solve(quest_1.Load("quest_1/p1/in.txt")))
 }

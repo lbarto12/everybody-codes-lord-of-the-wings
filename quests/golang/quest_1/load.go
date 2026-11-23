@@ -1,5 +1,5 @@
-// Package load
-package load
+// Package quest_1
+package quest_1
 
 import (
 	"log"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func From(path string) []int {
+func Load(path string) []int {
 	bytes, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatal(err)
