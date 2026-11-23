@@ -17,7 +17,7 @@ func Load(path string) []Vote {
 
 	res := []Vote{}
 
-	pattern := regexp.MustCompile(`ISO-(\d+) (\d+)`)
+	pattern := regexp.MustCompile(`(\d+) (\d+)`)
 	for _, line := range lines {
 		for _, match := range pattern.FindAllStringSubmatch(line, -1) {
 			std := match[1]
