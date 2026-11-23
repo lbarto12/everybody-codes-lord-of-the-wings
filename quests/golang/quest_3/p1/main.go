@@ -14,5 +14,5 @@ func Solve(data []quest3.Vote) int {
 }
 
 func main() {
-	fmt.Println(Solve(quest3.Load("quest_3/p1/in.txt")))
+	fmt.Println(Solve(quest3.Load(1)))
 }

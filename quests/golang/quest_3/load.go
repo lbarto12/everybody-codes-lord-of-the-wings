@@ -3,17 +3,17 @@ package quest3
 import (
 	"log"
 	"lotw"
-	"os"
 	"regexp"
+	"strings"
 )
 
-func Load(path string) []Vote {
-	file, err := os.Open(path)
+func Load(part int) []Vote {
+	api, err := lotw.MakeEverybodyCodesAPI()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var lines []string = lotw.ReadLines(file)
+	var lines []string = strings.Split(api.MustInput(3)[part], "\n")
 
 	res := []Vote{}
 
