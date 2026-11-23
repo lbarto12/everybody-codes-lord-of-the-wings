@@ -4,20 +4,19 @@ package quest2
 import (
 	"log"
 	"lotw"
-	"os"
 	"strconv"
 	"strings"
 )
 
-func Load(path string) [][]Pair {
-	file, err := os.Open(path)
+func Load(part int) [][]Pair {
+	api, err := lotw.MakeEverybodyCodesAPI()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var result [][]Pair = [][]Pair{}
+	var lines []string = strings.Split(api.MustInput(2)[part], "\n")
 
-	var lines []string = lotw.ReadLines(file)
+	var result [][]Pair = [][]Pair{}
 	for _, line := range lines {
 		result = append(result, []Pair{})
 		n := len(result) - 1

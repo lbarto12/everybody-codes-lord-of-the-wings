@@ -10,5 +10,5 @@ func Solve(data [][]quest2.Pair) int {
 }
 
 func main() {
-	fmt.Println(Solve(quest2.Load("quest_2/p1/in.txt")))
+	fmt.Println(Solve(quest2.Load(1)))
 }
