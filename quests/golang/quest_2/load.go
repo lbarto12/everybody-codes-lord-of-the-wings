@@ -3,7 +3,7 @@ package quest2
 
 import (
 	"log"
-	golang "lotw"
+	"lotw"
 	"os"
 	"strconv"
 	"strings"
@@ -17,7 +17,7 @@ func Load(path string) [][]Pair {
 
 	var result [][]Pair = [][]Pair{}
 
-	var lines []string = golang.ReadLines(file)
+	var lines []string = lotw.ReadLines(file)
 	for _, line := range lines {
 		result = append(result, []Pair{})
 		n := len(result) - 1
