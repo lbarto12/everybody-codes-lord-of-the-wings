@@ -104,6 +104,14 @@ func MakeEverybodyCodesAPI() (*EverybodyCodesAPI, error) {
 	return api, nil
 }
 
+func MustEverybodyCodesAPI() *EverybodyCodesAPI {
+	api, err := MakeEverybodyCodesAPI()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return api
+}
+
 func (api *EverybodyCodesAPI) getAESKeys(quest int) (*KeyedResponse, error) {
 	resp, err := api.client.Get(fmt.Sprintf("https://api.everybody.codes/event/2026/quest/%d", quest))
 	if err != nil {
