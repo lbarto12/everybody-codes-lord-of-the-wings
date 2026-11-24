@@ -40,6 +40,9 @@ func Adjacent(x int, y int) iter.Seq2[int, int] {
 	return func(yield func(int, int) bool) {
 		for i := -1; i <= 1; i++ {
 			for j := -1; j <= 1; j++ {
+				if j == 0 && i == 0 {
+					continue
+				}
 				if !yield(x+j, y+i) {
 					return
 				}
@@ -61,4 +64,25 @@ func Adjacent4(x int, y int) iter.Seq2[int, int] {
 			}
 		}
 	}
+}
+
+func Deepcopy2D[T any](data [][]T) [][]T {
+	if data == nil {
+		return nil
+	}
+
+	res := make([][]T, len(data))
+
+	for i, row := range data {
+		if row != nil {
+			res[i] = make([]T, len(row))
+			copy(res[i], row)
+		}
+	}
+
+	return res
+}
+
+func InBounds[T any](data [][]T, p Vec2[int]) bool {
+	return 0 <= p.X && p.X < len(data[0]) && 0 <= p.Y && p.Y < len(data)
 }
