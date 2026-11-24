@@ -14,13 +14,9 @@ func Solve(data [][]rune) ([][]rune, int) {
 	}
 	data[first.Y][first.X] = '#'
 
-	var land ds.Set[lotw.Vec2[int]] = ds.MakeSet([]lotw.Vec2[int]{
-		first,
-	})
+	var land ds.Set[lotw.Vec2[int]] = ds.MakeSet([]lotw.Vec2[int]{first})
 
-	var new_land ds.Set[lotw.Vec2[int]] = ds.MakeSet([]lotw.Vec2[int]{
-		first,
-	})
+	var new_land ds.Set[lotw.Vec2[int]] = ds.MakeSet([]lotw.Vec2[int]{first})
 
 	for true {
 		var gen [][]rune = lotw.Deepcopy2D(data)
