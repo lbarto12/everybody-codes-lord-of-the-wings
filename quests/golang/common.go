@@ -1,8 +1,8 @@
 package lotw
 
 import (
-	"cmp"
 	"iter"
+	"lotw/ds"
 	"slices"
 )
 
@@ -18,22 +18,6 @@ func Ipow(x int, e int) int {
 		r *= x
 	}
 	return r
-}
-
-type Vec2[T cmp.Ordered] struct {
-	X T
-	Y T
-}
-
-func (v Vec2[T]) Add(other Vec2[T]) Vec2[T] {
-	return Vec2[T]{
-		X: v.X + other.X,
-		Y: v.Y + other.Y,
-	}
-}
-
-func (v Vec2[T]) Unpack() (T, T) {
-	return v.X, v.Y
 }
 
 func Adjacent(x int, y int) iter.Seq2[int, int] {
@@ -53,7 +37,7 @@ func Adjacent(x int, y int) iter.Seq2[int, int] {
 
 func Adjacent4(x int, y int) iter.Seq2[int, int] {
 	return func(yield func(int, int) bool) {
-		for _, off := range []Vec2[int]{
+		for _, off := range []ds.Vec2[int]{
 			{X: -1, Y: 0},
 			{X: 1, Y: 0},
 			{X: 0, Y: -1},
@@ -83,6 +67,6 @@ func Deepcopy2D[T any](data [][]T) [][]T {
 	return res
 }
 
-func InBounds[T any](data [][]T, p Vec2[int]) bool {
+func InBounds[T any](data [][]T, p ds.Vec2[int]) bool {
 	return 0 <= p.X && p.X < len(data[0]) && 0 <= p.Y && p.Y < len(data)
 }
