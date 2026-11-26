@@ -9,7 +9,7 @@ import (
 func SolveP2(data [][]rune) ([][]rune, int) {
 	data, _ = SolveP1(data)
 
-	var edge_tiles ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{})
+	var edge_tiles ds.Set[ds.Vec2[int]] = ds.MakeSetFromSlice([]ds.Vec2[int]{})
 	var initial_beach [][]rune = data
 	for y, row := range data {
 		for x, c := range row {
@@ -22,9 +22,9 @@ func SolveP2(data [][]rune) ([][]rune, int) {
 	}
 	data = initial_beach
 
-	var sand ds.Set[ds.Vec2[int]] = ds.MakeSet(slices.Collect(edge_tiles.Iter()))
+	var sand ds.Set[ds.Vec2[int]] = ds.MakeSetFromSlice(slices.Collect(edge_tiles.Iter()))
 	for true {
-		var check ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{})
+		var check ds.Set[ds.Vec2[int]] = ds.MakeSet[ds.Vec2[int]]()
 		for s := range sand.Iter() {
 			for x, y := range lotw.Adjacent(s.X, s.Y) {
 				var pos ds.Vec2[int] = ds.Vec2[int]{

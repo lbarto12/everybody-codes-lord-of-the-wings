@@ -29,7 +29,7 @@ func AnyWater(data [][]rune, p ds.Vec2[int]) bool {
 }
 
 func CanPlaceTree(data [][]rune, p ds.Vec2[int]) bool {
-	var cancel ds.Set[int] = ds.MakeSet([]int{-2, 2})
+	var cancel ds.Set[int] = ds.MakeSetFromSlice([]int{-2, 2})
 	for y := -2; y <= 2; y++ {
 		for x := -2; x <= 2; x++ {
 			if cancel.Contains(x) && cancel.Contains(y) {

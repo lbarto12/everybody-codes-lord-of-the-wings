@@ -10,7 +10,7 @@ import (
 func Solve(data [][]rune) int {
 	data, _ = quest5.SolveP2(data)
 
-	var trees ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{})
+	var trees ds.Set[ds.Vec2[int]] = ds.MakeSet[ds.Vec2[int]]()
 	for y, row := range data {
 		for x, c := range row {
 			var pos ds.Vec2[int] = ds.Vec2[int]{X: x, Y: y}
@@ -22,7 +22,7 @@ func Solve(data [][]rune) int {
 	}
 
 	for range 2 {
-		var check ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{})
+		var check ds.Set[ds.Vec2[int]] = ds.MakeSet[ds.Vec2[int]]()
 		for tile := range trees.Iter() {
 			for x, y := range lotw.Adjacent(tile.X, tile.Y) {
 				var p ds.Vec2[int] = ds.Vec2[int]{X: x, Y: y}

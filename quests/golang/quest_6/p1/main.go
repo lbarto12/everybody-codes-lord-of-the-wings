@@ -8,7 +8,7 @@ import (
 
 func Solve(data map[string][]string) int {
 	var start []string = data["NULL"]
-	var ingredients ds.Set[string] = ds.MakeSet([]string{})
+	var ingredients ds.Set[string] = ds.MakeSet[string]()
 
 	return quest6.BFS(data, ingredients, start)
 }

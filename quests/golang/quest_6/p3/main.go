@@ -39,7 +39,7 @@ func Solve(data map[string][]string) int {
 				continue
 			}
 			if _, ok := chains[item]; !ok {
-				chains[item] = ds.MakeSet([]string{})
+				chains[item] = ds.MakeSet[string]()
 			}
 			chains[item].Add(i)
 
@@ -53,7 +53,7 @@ func Solve(data map[string][]string) int {
 		}
 	}
 
-	var doubles ds.Set[string] = ds.MakeSet([]string{})
+	var doubles ds.Set[string] = ds.MakeSet[string]()
 	for item_1, i_1 := range chains {
 		for item_2, i_2 := range chains {
 			if item_1 == item_2 {

@@ -15,10 +15,10 @@ func deduce(data [][]Pair) [][]Pair {
 	res := [][]Pair{}
 
 	for _, row := range data {
-		tmp := ds.MakeSet(row).ToSlice()
+		tmp := ds.MakeSetFromSlice(row).ToSlice()
 		last := len(tmp)
 		for true {
-			_new := ds.MakeSet([]Pair{})
+			_new := ds.MakeSet[Pair]()
 			for j, a := range tmp {
 				for _, b := range tmp[j+1:] {
 					if a.Left == b.Right {
@@ -28,7 +28,7 @@ func deduce(data [][]Pair) [][]Pair {
 					}
 				}
 			}
-			tmp = ds.MakeSet(tmp).Union(_new).ToSlice()
+			tmp = ds.MakeSetFromSlice(tmp).Union(_new).ToSlice()
 			if len(tmp) == last {
 				break
 			}

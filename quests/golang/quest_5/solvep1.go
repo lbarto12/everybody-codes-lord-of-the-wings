@@ -12,12 +12,12 @@ func SolveP1(data [][]rune) ([][]rune, int) {
 	}
 	data[first.Y][first.X] = '#'
 
-	var land ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{first})
-	var new_land ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{first})
+	var land ds.Set[ds.Vec2[int]] = ds.MakeSetFromSlice([]ds.Vec2[int]{first})
+	var new_land ds.Set[ds.Vec2[int]] = ds.MakeSetFromSlice([]ds.Vec2[int]{first})
 
 	for true {
 		var gen [][]rune = data
-		var next_loop ds.Set[ds.Vec2[int]] = ds.MakeSet([]ds.Vec2[int]{})
+		var next_loop ds.Set[ds.Vec2[int]] = ds.MakeSet[ds.Vec2[int]]()
 
 		for pos := range new_land.Iter() {
 			x, y := pos.Unpack()

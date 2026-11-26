@@ -25,7 +25,7 @@ type Set[T comparable] struct {
 
 var _ SetInterface[int, Set[int]] = Set[int]{}
 
-func MakeSet[T comparable](init []T) Set[T] {
+func MakeSetFromSlice[T comparable](init []T) Set[T] {
 	items := map[T]struct{}{}
 
 	for _, item := range init {
@@ -37,6 +37,12 @@ func MakeSet[T comparable](init []T) Set[T] {
 	}
 
 	return set
+}
+
+func MakeSet[T comparable]() Set[T] {
+	return Set[T]{
+		items: map[T]struct{}{},
+	}
 }
 
 func (set Set[T]) Add(item T) {
