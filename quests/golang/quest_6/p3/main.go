@@ -60,9 +60,7 @@ func Solve(data map[string][]string) int {
 				continue
 			}
 
-			for x := range i_1.Intersection(i_2).Iter() {
-				doubles.Add(x)
-			}
+			doubles.Update(i_1.Intersection(i_2))
 		}
 	}
 

@@ -41,6 +41,18 @@ func (set Set[T]) Add(item T) {
 	set.items[item] = struct{}{}
 }
 
+func (set Set[T]) Update(other Set[T]) {
+	for x := range other.Iter() {
+		set.Add(x)
+	}
+}
+
+func (set Set[T]) UpdateFromSlice(items []T) {
+	for _, x := range items {
+		set.Add(x)
+	}
+}
+
 func (set Set[T]) Contains(item T) bool {
 	_, ok := set.items[item]
 	return ok
