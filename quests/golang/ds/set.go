@@ -8,6 +8,8 @@ import (
 
 type SetInterface[T comparable, S any] interface {
 	Add(item T)
+	Update(other S)
+	UpdateFromSlice(items []T)
 	Contains(item T) bool
 	Union(other S) S
 	Intersection(other S) S
